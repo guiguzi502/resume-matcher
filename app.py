@@ -4,6 +4,7 @@
 运行: streamlit run app.py
 """
 import os
+import tempfile
 from pathlib import Path
 
 import streamlit as st
@@ -45,18 +46,19 @@ with left:
     upload = st.file_uploader("上传简历文件", type=["pdf", "docx", "txt", "md"])
     resume_text = ""
     if upload is not None:
-        suffix = Path(upload.name).suffix.lower()
+        suffix = upload.name[upload.name.rfind("."):].lower() if "." in upload.name else ""
         if suffix not in SUPPORTED:
             st.error(f"不支持 {suffix}，请用 PDF/DOCX/TXT/MD")
         else:
-            tmp = Path("samples") / f"_upload{suffix}"
-            tmp.parent.mkdir(exist_ok=True)
+            tmp = Path(tempfile.gettempdir()) / f"_upload{suffix}"
             tmp.write_bytes(upload.getvalue())
             try:
                 resume_text = extract_text(tmp)
                 st.success(f"已提取 {len(resume_text)} 字符")
             except UnsupportedFormatError as exc:
                 st.error(str(exc))
+            finally:
+                tmp.unlink(missing_ok=True)
     else:
         st.info("也可以直接粘贴文本 ↓")
     paste_resume = st.text_area("或粘贴简历文本", height=200,
