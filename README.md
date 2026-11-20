@@ -5,6 +5,11 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-2E86AB)
+![Deploy](https://img.shields.io/badge/Deploy-Streamlit%20Cloud-4E79A7?logo=streamlit&logoColor=white)
+
+## 🚀 在线 Demo
+
+**👉 [resume-matcher-502.streamlit.app](https://resume-matcher-502.streamlit.app)**（免费托管，首次打开约 30 秒冷启动）
 
 ---
 
@@ -77,7 +82,7 @@ python -m pytest tests/ -v
 
 - [x] v1 规则引擎 + Streamlit 界面
 - [x] LLM 结构化打分（JSON schema）
-- [ ] 在线部署 demo（Streamlit Cloud）
+- [x] 在线部署 demo（Streamlit Cloud）
 - [ ] 简历成果数字抽取与强调
 - [ ] 多份简历对比模式
 
